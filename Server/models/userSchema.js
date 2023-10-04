@@ -27,7 +27,39 @@ const userSchema = new mongoose.Schema({
 
      yearOfBirth: {
         type : Number,
-        requires : true
+        required : true
+     },
+
+     inRelationship : {
+      type : Boolean
+     },
+
+     gender : {
+      type : String
+     },
+
+     college : {
+      type : String
+     },
+
+     course : {
+      type : String
+     },
+
+     bodyCount : {
+      type : Number
+     },
+
+     height : {
+      type : Number
+     },
+
+     isSmoker : {
+      type : Boolean
+     },
+
+     isDrinker : {
+      type : Boolean
      }
 
 },{timestamps : true})

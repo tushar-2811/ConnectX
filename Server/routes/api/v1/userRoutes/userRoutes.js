@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { loginController, signUpController } from "../../../../controllers/api/v1/userController.js";
+import { getUserDataController, loginController, signUpController, updateInformationController } from "../../../../controllers/api/v1/userController.js";
+import { isAuthenticated } from "../../../../middlewares/isAuthenticated.js";
 
 const userRouter = Router();
 
@@ -10,6 +11,12 @@ userRouter.post('/signup' , signUpController);
 
 // sign-in
 userRouter.post('/login' , loginController);
+
+// get information
+userRouter.get('/profile' , isAuthenticated , getUserDataController );
+
+// to update information
+userRouter.post('/update' , isAuthenticated , updateInformationController);
 
 
 export default userRouter;
