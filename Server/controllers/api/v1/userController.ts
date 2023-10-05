@@ -1,6 +1,7 @@
-import User from "../../../models/userSchema.js"
-import { comparePassword, hashPassword } from '../../../config/cryptPassword.js'
+import User from "../../../models/userSchema"
+import { comparePassword, hashPassword } from '../../../config/cryptPassword'
 import JWT from "jsonwebtoken";
+import { Request , Response } from "express";
 // sign-up controller
 
 export const signUpController = async (req, res) => {
@@ -59,7 +60,6 @@ export const signUpController = async (req, res) => {
             return res.status(500).json({
                 ok: false,
                 message: "error in creating new user",
-                error
             })
         }
 
@@ -124,9 +124,9 @@ export const loginController = async (req, res) => {
 
 
 // get user data
-export const getUserDataController = async (req, res) => {
+export const getUserDataController = async (req:Request, res:Response) => {
     try {
-        const userId = req.userId;
+        const userId = req.headers.userId;
 
         const existingUser = await User.findById(userId);
 
@@ -157,7 +157,7 @@ export const getUserDataController = async (req, res) => {
 // to update information
 export const updateInformationController = async (req, res) => {
     try {
-        const userId = req.userId;
+        const userId = req.headers.userId;
         const { college, course, gender, bodyCount, height, isSmoker, isDrinker, inRelationship } = req.body;
 
         const existingUser = await User.findById(userId);
